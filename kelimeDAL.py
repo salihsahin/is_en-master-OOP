@@ -50,8 +50,7 @@ class KelimeDAL:
     def KelimeKategoriEkle():
         pass
 
-    def KelimeKategoriGuncelle():
-        pass
+
     def KelimeKategoriSil():
         pass
 
@@ -85,3 +84,12 @@ class KelimeDAL:
         print("Bulunan id ", bulunacakKelimeId)
         Kelime.kelimeId=bulunacakKelimeId
         return Kelime
+
+    @staticmethod
+    def KelimeVideoGuncelle(KelimeEntity,VideoEntity):
+        KelimeDAL.KelimeIDBul(KelimeEntity)
+        print(KelimeEntity.kelimeId)
+
+
+
+        return -1

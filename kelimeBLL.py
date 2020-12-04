@@ -25,8 +25,8 @@ class KelimeBLL:
         pass
 
     @staticmethod
-    def KelimeVideoGuncelle(KelimeEntity):
-        KelimeDAL.KelimeGuncelle()
+    def KelimeVideoGuncelle(KelimeEntity,videoEntity):
+        return KelimeDAL.KelimeGuncelle()
 
     @staticmethod
     def KelimeSil(KelimeEntity,VideoEntity):
