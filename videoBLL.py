@@ -26,11 +26,11 @@ class VideoBLL:
 
 
     @staticmethod
-    def VideoKopyala(video):
+    def VideoKopyala(video=Video):
         try:
-
-            eklenecekVideo = video
-            shutil.copy(eklenecekVideo.videoKaynakYol, eklenecekVideo.videoHedefYol)
+            print(video.videoKaynakYol)
+            print(video.videoHedefYol)
+            shutil.copy(video.videoKaynakYol, video.videoHedefYol)
             print("video kopyalandı.")
             return True
         except Exception as exp:

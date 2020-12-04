@@ -1,7 +1,7 @@
 import sqlite3
 conn = sqlite3.connect('Sozluk.db')
 from entity import Kelime
-from entity import  Video
+from entity import Video
 class KelimeDAL:
 
     @staticmethod
@@ -23,7 +23,7 @@ class KelimeDAL:
             print("kelime EKleme  başlayacak")
             with conn:
                 cur = conn.cursor()
-                cur.execute("INSERT INTO KELIMELER (KELIME_ADI,KELIME_YOLU) VALUES(?,?)", [yeniKelime.kelime.upper(), yeniVideo.videoHedefYol])
+                cur.execute("INSERT INTO KELIMELER (KELIME_ADI,KELIME_YOLU) VALUES(?,?)", [yeniKelime.kelime, yeniVideo.videoHedefYol])
                 kelimeId = cur.lastrowid
                 print("kelime eklendi")
                 return kelimeId
@@ -75,7 +75,7 @@ class KelimeDAL:
 
             with conn:
                 cur = conn.cursor()
-                cur.execute("select ID from KELIMELER where KELIME_ADI=(?)", [Kelime.kelime])
+                cur.execute("select ID from KELIMELER where KELIME_ADI=(?)", [Kelime.kelime.upper()])
                 bulunacakKelimeId = cur.fetchone()[0]
                 print("Bulundu.")
         except Exception as exp:
@@ -86,10 +86,19 @@ class KelimeDAL:
         return Kelime
 
     @staticmethod
-    def KelimeVideoGuncelle(KelimeEntity,VideoEntity):
+    def KelimeVideoGuncelle(KelimeEntity=Kelime,VideoEntity=Video):
+        print("kelimevideo güncelle dal çalıştı.")
         KelimeDAL.KelimeIDBul(KelimeEntity)
+
+        print("Keliem İd ")
         print(KelimeEntity.kelimeId)
 
+        try:
+            with conn:
+                cur = conn.cursor()
+                cur.execute("update KELIMELER set KELIME_ADI=(?),KELIME_YOLU=(?) where ID=(?)", [KelimeEntity.duzenlenecekYeniKelime, VideoEntity.videoHedefYol,KelimeEntity.kelimeId])
 
+        except Exception as exp:
+            print(exp)
+        print("kelime dal kelime güncelle çıkılıyor")
 
-        return -1

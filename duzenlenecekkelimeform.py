@@ -209,7 +209,7 @@ class DuzenlenecekKelimeForm(QDialog):
 
     def kelimeDuzenle(self):
         print("Düzenle Başladı")
-        self.duzenlenecekKelimObj.duzenlenecekYeniKelime = self.yeniKelimeEkleText.text()
+        self.duzenlenecekKelimObj.duzenlenecekYeniKelime = self.yeniKelimeEkleText.text().upper()
         print("if çalışacak")
         if self.duzenlenecekKelimObj.duzenlenecekYeniKelime == "" or len(
                 self.duzenlenecekKategoriObj.duzenlenecekYeniKategoriler) == 0:
@@ -229,10 +229,11 @@ class DuzenlenecekKelimeForm(QDialog):
             else:
                 print("yeni video seçilmedi")
 
-            guncellenenKelimeId = KelimeBLL.KelimeVideoGuncelle(self.duzenlenecekKelimObj,self.duzenlenecekVideoObj)
-            self.duzenlenecekKelimObj.kelimeId =guncellenenKelimeId
+            print("kelime güncellenecek.")
+            KelimeBLL.KelimeVideoGuncelle(self.duzenlenecekKelimObj,self.duzenlenecekVideoObj)
+            print(self.duzenlenecekKelimObj.kelimeId)
 
-            KategoriBLL.KategoriKelimeIdEkle(self.duzenlenecekKelimObj, self.duzenlenecekKategoriObj)
+            #KategoriBLL.KategoriKelimeIdEkle(self.duzenlenecekKelimObj, self.duzenlenecekKategoriObj)
 
 
 

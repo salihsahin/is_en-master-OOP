@@ -105,7 +105,7 @@ class YeniKelimeEkle(QDialog):
 
     def yeniKelimeyiKaydetFonk(self):
         print("Kaydet Başladı")
-        self.yeniKelimObj.kelime=self.yeniKelimeEkleText.text()
+        self.yeniKelimObj.kelime=self.yeniKelimeEkleText.text().upper()
         print("if çalışacak")
         if self.yeniKelimObj.kelime == "" or len(self.yeniKategoriObj.kategoriler)==0 or self.yeniVideoObj.videoKaynakYol == "":
             print("Boş Bırakıldı")

@@ -26,10 +26,12 @@ class KelimeBLL:
 
     @staticmethod
     def KelimeVideoGuncelle(KelimeEntity,videoEntity):
-        return KelimeDAL.KelimeGuncelle()
+        print("kelimvideogüncelle bll çalıştı.")
+        KelimeDAL.KelimeVideoGuncelle(KelimeEntity,videoEntity)
 
     @staticmethod
     def KelimeSil(KelimeEntity,VideoEntity):
+
         # VideoBLL.VideoSil(VideoEntity)
         return  KelimeDAL.KelimeSil(KelimeEntity)
 
