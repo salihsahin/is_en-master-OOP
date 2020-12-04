@@ -12,3 +12,4 @@ Test yapılacak.
 
 Not : Uygulanın çalışması için Klite Codec paketinin yüklü olması gerekmektedir.
 
+Ana Proje Linki: https://github.com/munel/is_en
