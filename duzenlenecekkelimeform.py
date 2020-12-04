@@ -231,6 +231,7 @@ class DuzenlenecekKelimeForm(QDialog):
 
             guncellenenKelimeId = KelimeBLL.KelimeVideoGuncelle(self.duzenlenecekKelimObj,self.duzenlenecekVideoObj)
             self.duzenlenecekKelimObj.kelimeId =guncellenenKelimeId
+
             KategoriBLL.KategoriKelimeIdEkle(self.duzenlenecekKelimObj, self.duzenlenecekKategoriObj)
 
 
