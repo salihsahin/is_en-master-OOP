@@ -229,7 +229,8 @@ class DuzenlenecekKelimeForm(QDialog):
             else:
                 print("yeni video seçilmedi")
 
-            KelimeBLL.KelimeVideoGuncelle(self.duzenlenecekKelimObj,self.duzenlenecekVideoObj)
+            guncellenenKelimeId = KelimeBLL.KelimeVideoGuncelle(self.duzenlenecekKelimObj,self.duzenlenecekVideoObj)
+            self.duzenlenecekKelimObj.kelimeId =guncellenenKelimeId
             KategoriBLL.KategoriKelimeIdEkle(self.duzenlenecekKelimObj, self.duzenlenecekKategoriObj)
 
 

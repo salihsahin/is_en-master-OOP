@@ -19,9 +19,6 @@ class KategoriBLL:
     def KategoriSil(self):
         pass
 
-    def KategoriSil(self):
-        pass
-
     @staticmethod
     def KelimeyeAitKategoriBul(Kelime):
         print("Kategori Bul Bll Çalıştı")
@@ -34,5 +31,8 @@ class KategoriBLL:
 
         return  KategoriDAL.KelimeyeAitKategoriBul(Kelime)
 
-
-
+    @staticmethod
+    def KategoriKelimeIdGuncelle(kelime, kategori):
+        #kelimeye ait tüm kategorileri sil
+        #kelimeye ait yeni kategorileri ekle.
+        pass
