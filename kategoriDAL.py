@@ -1,5 +1,7 @@
 import sqlite3
 from entity import Kategori
+from entity import Kelime
+
 conn = sqlite3.connect('Sozluk.db')
 
 
@@ -77,7 +79,26 @@ class KategoriDAL:
                     groupId = idH[0]
                     print("execute yapılacak.")
                     cur.execute("INSERT INTO GRUP_KELIMELERI (GRUP_ID,KELIME_ID) VALUES(?,?)", [groupId, eklenenKelimeId])
-            print ("Bİtti")
+            print ("Bitti")
+            return True
+        except Exception as exp:
+            print(exp)
+            return False
+
+    @staticmethod
+    def KategoriKelimeIdSil(kelime=Kelime):
+        try:
+            with conn:
+                print("Kategoriler silinmeye başlandı")
+                cur = conn.cursor()
+                print("conn açıldı")
+
+                cur.execute("delete from GRUP_KELIMELERI WHERE KELIME_ID=(?)", [kelime.kelimeId])
+                print("fetch yapılacak.")
+
+
+
+                print("Bitti")
             return True
         except Exception as exp:
             print(exp)

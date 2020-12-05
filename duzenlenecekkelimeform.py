@@ -233,7 +233,7 @@ class DuzenlenecekKelimeForm(QDialog):
             KelimeBLL.KelimeVideoGuncelle(self.duzenlenecekKelimObj,self.duzenlenecekVideoObj)
             print(self.duzenlenecekKelimObj.kelimeId)
 
-            #KategoriBLL.KategoriKelimeIdEkle(self.duzenlenecekKelimObj, self.duzenlenecekKategoriObj)
+            KategoriBLL.KategoriKelimeIdGuncelle(self.duzenlenecekKelimObj, self.duzenlenecekKategoriObj)
 
 
 

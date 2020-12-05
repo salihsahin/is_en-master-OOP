@@ -33,6 +33,9 @@ class KategoriBLL:
 
     @staticmethod
     def KategoriKelimeIdGuncelle(kelime, kategori):
-        #kelimeye ait tüm kategorileri sil
-        #kelimeye ait yeni kategorileri ekle.
-        pass
+        KategoriDAL.KategoriKelimeIdSil(kelime)
+        print("Kategori eklenecek : ")
+        print(kelime.kelimeId)
+        kategori.kategoriler = kategori.duzenlenecekYeniKategoriler
+        print(kategori.kategoriler)
+        return KategoriDAL.KategoriKelimeIdEkle(kelime.kelimeId, kategori)

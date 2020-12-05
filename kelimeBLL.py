@@ -1,5 +1,10 @@
 from kelimeDAL import KelimeDAL
+from kategoriDAL import KategoriDAL
 from entity import Kelime
+from entity import Kategori
+from entity import Video
+
+
 
 class KelimeBLL:
 

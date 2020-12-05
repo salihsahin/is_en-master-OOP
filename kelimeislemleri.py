@@ -129,9 +129,6 @@ class YeniKelimeEkle(QDialog):
                 self.done(-1)
 
 
-
-
-
     def listedenSecimleriAyarlar(self):
         sectim = self.listWidgetYKelime.selectedItems()
         self.yeniKategoriObj.kategoriler = [s.text() for s in sectim]
