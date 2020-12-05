@@ -1,7 +1,7 @@
 from kategoriDAL import KategoriDAL
-from kelimeBLL import KelimeBLL
-
+from kelimeBLL import  KelimeBLL
 from entity import Kategori
+from entity import Kelime
 
 class KategoriBLL:
 
@@ -33,9 +33,14 @@ class KategoriBLL:
 
     @staticmethod
     def KategoriKelimeIdGuncelle(kelime, kategori):
-        KategoriDAL.KategoriKelimeIdSil(kelime)
+        KategoriBLL.KategoriKelimeIdSil(kelime)
         print("Kategori eklenecek : ")
         print(kelime.kelimeId)
+
         kategori.kategoriler = kategori.duzenlenecekYeniKategoriler
         print(kategori.kategoriler)
         return KategoriDAL.KategoriKelimeIdEkle(kelime.kelimeId, kategori)
+
+    @staticmethod
+    def KategoriKelimeIdSil(kelime=Kelime):
+        KategoriDAL.KategoriKelimeIdSil(kelime)
