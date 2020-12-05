@@ -15,3 +15,5 @@ class Helper:
         yeniSozcuk = sozcuk.upper()
         return yeniSozcuk
 
+        #print(Helper.KucukHarfleriBuyukYap("qwertyuıopğüasdfghjklşizxcvbnmöç"))
+        #print("QWERTYUIOPĞÜASDFGHJKLŞİZXCVBNMÖÇ")

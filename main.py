@@ -11,6 +11,7 @@ import sqlite3
 from kategoriBLL import KategoriBLL
 from kelimeBLL import KelimeBLL
 
+from helper import Helper
 
 
 conn = sqlite3.connect('Sozluk.db')
@@ -47,6 +48,7 @@ class MyForm(QMainWindow):
         self.mediaPlayer.setVideoOutput(videoWidget)
         ##self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile("VIDEOLAR/RAHAT.mp4")))
         self.mediaPlayer.play()
+
 
         self.show()
 
@@ -213,7 +215,7 @@ class MyForm(QMainWindow):
         self.seciliListe.clear()
         aramaMetni = self.ui.lineEdit.text()
         for v in self.kelimeListesi:
-            if v.startswith(aramaMetni.upper()):
+            if v.startswith(Helper.KucukHarfleriBuyukYap(aramaMetni)):
                 self.seciliListe.append(v)
 
         self.ui.listWidget.addItems(self.seciliListe)

@@ -4,6 +4,7 @@ import os
 
 class VideoBLL:
 
+    @staticmethod
     def VideolariListele():
         pass
 
@@ -36,17 +37,3 @@ class VideoBLL:
         except Exception as exp:
             print(exp)
             return False
-
-    def VideoIsmiDuzenle(self):
-        pass
-
-####________Veri Tabanı İşlemleri________#####
-
-    def VideoVeriTabaniEkle(self):
-        pass
-
-    def VideoVeriTabaniDuzenle(self):
-        pass
-
-    def VideoVeriTabaniSil(self):
-        pass

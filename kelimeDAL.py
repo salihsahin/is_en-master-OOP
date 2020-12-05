@@ -75,7 +75,7 @@ class KelimeDAL:
 
             with conn:
                 cur = conn.cursor()
-                cur.execute("select ID from KELIMELER where KELIME_ADI=(?)", [Kelime.kelime.upper()])
+                cur.execute("select ID from KELIMELER where KELIME_ADI=(?)", [Kelime.kelime])
                 bulunacakKelimeId = cur.fetchone()[0]
                 print("Bulundu.")
         except Exception as exp:

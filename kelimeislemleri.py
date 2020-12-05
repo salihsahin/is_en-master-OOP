@@ -17,7 +17,7 @@ from entity import Kategori
 from kelimeBLL import KelimeBLL
 from kategoriBLL import KategoriBLL
 from videoBLL import VideoBLL
-
+from helper import Helper
 
 class YeniKelimeEkle(QDialog):
     def __init__(self):
@@ -105,7 +105,7 @@ class YeniKelimeEkle(QDialog):
 
     def yeniKelimeyiKaydetFonk(self):
         print("Kaydet Başladı")
-        self.yeniKelimObj.kelime=self.yeniKelimeEkleText.text().upper()
+        self.yeniKelimObj.kelime=Helper.KucukHarfleriBuyukYap(self.yeniKelimeEkleText.text())
         print("if çalışacak")
         if self.yeniKelimObj.kelime == "" or len(self.yeniKategoriObj.kategoriler)==0 or self.yeniVideoObj.videoKaynakYol == "":
             print("Boş Bırakıldı")

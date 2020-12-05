@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QDialog, QApplication, QFileDialog, QInputDialog, QM
 from entity import Kelime
 from entity import Video
 from kelimeBLL import KelimeBLL
+from helper import Helper
 
 class SilinecekKelimeForm(QDialog):
 
@@ -114,7 +115,7 @@ class SilinecekKelimeForm(QDialog):
         self.seciliListe.clear()
         aramaMetni = self.silinecekKelimeText.text()
         for v in self.silienecekKelimObj.kelimeler:
-            if v.startswith(aramaMetni.upper()):
+            if v.startswith(Helper.KucukHarfleriBuyukYap(aramaMetni)):
                 self.seciliListe.append(v)
 
         self.listWidgetSilenecekKelimeler.addItems(self.seciliListe)

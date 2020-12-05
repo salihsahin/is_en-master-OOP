@@ -15,7 +15,7 @@ from entity import Kategori
 from kelimeBLL import KelimeBLL
 from videoBLL import VideoBLL
 from kategoriBLL import KategoriBLL
-
+from helper import Helper
 
 
 class DuzenlenecekKelimeForm(QDialog):
@@ -120,7 +120,7 @@ class DuzenlenecekKelimeForm(QDialog):
             self.seciliListe.clear()
             aramaMetni = self.duzenlenecekKelimeText.text()
             for v in self.duzenlenecekKelimObj.kelimeler:
-                if v.startswith(aramaMetni.upper()):
+                if v.startswith(Helper.KucukHarfleriBuyukYap(aramaMetni)):
                     self.seciliListe.append(v)
 
             self.listWidgetDuzenlenecekKelimeler.addItems(self.seciliListe)
@@ -209,7 +209,7 @@ class DuzenlenecekKelimeForm(QDialog):
 
     def kelimeDuzenle(self):
         print("Düzenle Başladı")
-        self.duzenlenecekKelimObj.duzenlenecekYeniKelime = self.yeniKelimeEkleText.text().upper()
+        self.duzenlenecekKelimObj.duzenlenecekYeniKelime = Helper.KucukHarfleriBuyukYap(self.yeniKelimeEkleText.text())
         print("if çalışacak")
         if self.duzenlenecekKelimObj.duzenlenecekYeniKelime == "" or len(
                 self.duzenlenecekKategoriObj.duzenlenecekYeniKategoriler) == 0:
