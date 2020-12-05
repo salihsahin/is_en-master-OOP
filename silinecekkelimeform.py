@@ -84,6 +84,8 @@ class SilinecekKelimeForm(QDialog):
             self.videoyuOynat(None)
         else:
             QMessageBox.information(self, "Kelime Silme", "Kelime silinmedi")
+        self.listeleriHazirla()
+        self.listeyiHazirla()
 
     def listeleriHazirla(self):
         kelimeListesiTupple  = KelimeBLL.KelimeleriListele()

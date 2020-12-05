@@ -234,7 +234,8 @@ class DuzenlenecekKelimeForm(QDialog):
             print(self.duzenlenecekKelimObj.kelimeId)
 
             KategoriBLL.KategoriKelimeIdGuncelle(self.duzenlenecekKelimObj, self.duzenlenecekKategoriObj)
-
+            self.listeleriHazirla()
+            self.listeyiHazirla()
 
 
 

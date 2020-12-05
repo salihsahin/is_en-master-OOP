@@ -70,12 +70,10 @@ class MyForm(QMainWindow):
             print(e)
         if self.yenikelimeEkle.exec_() == 1:
             self.listeleriHazirla()
-            self.ui.listWidget.clear()
-            self.ui.listWidget.addItems(self.kelimeListesi)
+            self.listeyiHazirla()
             QMessageBox.information(self, "Yeni Kelime", "Yeni Kelime Eklendi")
 
     def kelimeSil(self):
-        self.listeleriHazirla()
         try:
             self.kelimeSil = SilinecekKelimeForm()
             self.kelimeSil.show()
@@ -87,11 +85,14 @@ class MyForm(QMainWindow):
             self.listeleriHazirla()
             self.ui.listWidget.clear()
             self.ui.listWidget.addItems(self.kelimeListesi)
-            QMessageBox.information(self, "Yeni Kelime", "Yeni Kelime Eklendi")
+            QMessageBox.information(self, "Kelime Sil", "Kelime Silindi")
+            self.listeleriHazirla()
+            self.listeyiHazirla()
+
 
 
     def kelimeDuzenle(self):
-        self.listeleriHazirla()
+
         print("Kelime Düzenle menü basıldı")
         try:
             self.KelimeDuzenle = DuzenlenecekKelimeForm()
@@ -106,7 +107,8 @@ class MyForm(QMainWindow):
             self.ui.listWidget.clear()
             self.ui.listWidget.addItems(self.kelimeListesi)
             QMessageBox.information(self, "Kelime Düzenle", "Kelime Düzeltildi.")
-
+            self.listeleriHazirla()
+            self.listeyiHazirla()
 
 
 
@@ -187,9 +189,11 @@ class MyForm(QMainWindow):
                 print(e)
 
     def comboListeHazirla(self):
+        self.ui.comboBox.clear()
         self.ui.comboBox.addItems(self.kategoriListesi)
 
     def listeyiHazirla(self):
+        self.ui.listWidget.clear()
         self.ui.listWidget.addItems(self.kelimeListesi)
 
     def videoyuOynat(self, video):
