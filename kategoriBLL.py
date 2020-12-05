@@ -44,3 +44,7 @@ class KategoriBLL:
     @staticmethod
     def KategoriKelimeIdSil(kelime=Kelime):
         KategoriDAL.KategoriKelimeIdSil(kelime)
+
+    @staticmethod
+    def KategoriyeAitKelimeler(kategori=Kategori):
+        return KategoriDAL.KategoriyeAitKelimeler(kategori)

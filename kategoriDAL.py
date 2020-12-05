@@ -103,3 +103,14 @@ class KategoriDAL:
         except Exception as exp:
             print(exp)
             return False
+
+    @staticmethod
+    def KategoriyeAitKelimeler(kategori=Kategori):
+        sonuc=""
+        with conn:
+            cur = conn.cursor()
+            cur.execute("SELECT KELIME_ADI FROM WR_GRUP_KELIMELERI WHERE GRUP_ADI=(?)", [kategori.kategori])
+            sonuc = cur.fetchall()
+
+        kelimeListesi = [item[0] for item in sonuc]
+        return kelimeListesi

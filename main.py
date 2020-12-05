@@ -10,7 +10,8 @@ from form import *
 import sqlite3
 from kategoriBLL import KategoriBLL
 from kelimeBLL import KelimeBLL
-
+from entity import Kelime
+from entity import Kategori
 from helper import Helper
 
 
@@ -33,7 +34,8 @@ class MyForm(QMainWindow):
         self.ui.actionKelime_Sil.triggered.connect(self.kelimeSil)
         self.ui.actionKelime_Duzenle.triggered.connect(self.kelimeDuzenle)
 
-
+        self.secilenKelime=Kelime
+        self.secilenKategori = Kategori
         self.kelimeListesi = []
         self.kategoriListesi = []
         self.seciliListe = []
@@ -174,17 +176,14 @@ class MyForm(QMainWindow):
                     print(e)
 
     def comboBoxSecim(self):
+        self.secilenKategori.kategori = self.ui.comboBox.itemText(self.ui.comboBox.currentIndex())
 
-        kategori = self.ui.comboBox.itemText(self.ui.comboBox.currentIndex())
+
         if (self.ui.comboBox.currentIndex() != 0):
             try:
-                with conn:
-                    cur = conn.cursor()
-                    cur.execute("SELECT KELIME_ADI FROM WR_GRUP_KELIMELERI WHERE GRUP_ADI=(?)", [kategori])
-                    sonuc = cur.fetchall()
-                seciliListe = [item[0] for item in sonuc]
+                kelimeListesi = KategoriBLL.KategoriyeAitKelimeler(self.secilenKategori)
                 self.ui.listWidget.clear()
-                self.ui.listWidget.addItems(seciliListe)
+                self.ui.listWidget.addItems(kelimeListesi)
             except Exception as e:
                 print(e)
 
@@ -203,11 +202,9 @@ class MyForm(QMainWindow):
         self.mediaPlayer.play()
 
     def listedeKiElemanSecildi(self):
-        d = self.ui.listWidget.currentItem()
-        with conn:
-            cur = conn.cursor()
-            cur.execute("SELECT KELIME_YOLU FROM KELIMELER Where KELIME_ADI=(?)", [d.text()])
-            sonuc = cur.fetchone()[0]
+        self.secilenKelime.kelime = self.ui.listWidget.currentItem().text()
+
+        sonuc = KelimeBLL.KelimeVideoBul(self.secilenKelime)
         print(sonuc)
         self.videoyuOynat(sonuc)
 
@@ -223,7 +220,6 @@ class MyForm(QMainWindow):
                 self.seciliListe.append(v)
 
         self.ui.listWidget.addItems(self.seciliListe)
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
