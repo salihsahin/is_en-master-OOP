@@ -36,6 +36,7 @@ class MyForm(QMainWindow):
 
         self.secilenKelime=Kelime
         self.secilenKategori = Kategori
+        self.yeniKategori=Kategori
 
         self.silinecekKategori=Kategori
         self.kelimeListesi = []
@@ -140,27 +141,30 @@ class MyForm(QMainWindow):
                     QMessageBox.information(self, "Düzenleme", "Kategori Düzenlendi")
 
     def yeniKategoriEkle(self):
-        yeniKategori, okPressed = QInputDialog.getText(self, "Kategori Ekleme", "Yeni Kategori:", QLineEdit.Normal, "")
-        if okPressed and yeniKategori != '':
-            # kategoriler tablosuna yeni kategori eklenecek
-            try:
-                with conn:
-                    cur = conn.cursor()
-                    cur.execute("INSERT INTO GRUPLAR (GRUP_ADI) VALUES (?)",
-                                [yeniKategori])
-                print(yeniKategori)
-                self.kategoriListesi.append(yeniKategori)
-                self.ui.comboBox.clear()
-                self.ui.comboBox.addItems(self.kategoriListesi)
-                self.ui.listWidget.clear()
-                self.ui.listWidget.addItems(self.kelimeListesi)
-                QMessageBox.information(self, "Kategori Ekleme", "Yeni Kategori Eklendi")
-            except Exception as e:
-                print(e)
+        try:
+            yazilanYeniKategori, okPressed = QInputDialog.getText(self, "Kategori Ekleme", "Yeni Kategori:", QLineEdit.Normal, "")
+            self.yeniKategori.kategori=Helper.KucukHarfleriBuyukYap(yazilanYeniKategori)
+            if okPressed and self.yeniKategori.kategori != '':
+                # kategoriler tablosuna yeni kategori eklenecek
+
+                    eklendiMi= KategoriBLL.KategoriEkle(self.yeniKategori)
+
+                    if (eklendiMi):
+                        QMessageBox.information(self, "Kategori Ekleme", "Yeni Kategori Eklendi")
+
+                        self.listeleriHazirla()
+                        self.comboListeHazirla()
+                        self.listeyiHazirla()
+                    else:
+                        raise Exception("Sql kayıt eklenemedi.")
+
+        except Exception as e:
+            print(e)
+            QMessageBox.warning(self, "Kategori Ekleme", "Yeni Kategori Eklenemedi.")
 
     def kategoriSil(self):
         try:
-            self.silinecekKategori.kategori, okPressed = QInputDialog.getItem(self, "Kategori Silme İşlemi", "Silineek Kategoriyi Seçin:",
+            self.silinecekKategori.kategori, okPressed = QInputDialog.getItem(self, "Kategori Silme İşlemi", "Silinecek Kategoriyi Seçin:",
                                                    self.kategoriListesi, 0, False)
             if okPressed and self.silinecekKategori.kategori:
                 if self.silinecekKategori.kategori != "BÜTÜN İÇERİK":

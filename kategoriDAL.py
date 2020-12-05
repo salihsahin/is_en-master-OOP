@@ -122,3 +122,18 @@ class KategoriDAL:
 
         kelimeListesi = [item[0] for item in sonuc]
         return kelimeListesi
+
+
+    @staticmethod
+    def KategoriEkle(kategori=Kategori):
+        try:
+            with conn:
+                cur = conn.cursor()
+                cur.execute("INSERT INTO GRUPLAR (GRUP_ADI) VALUES (?)",
+                            [kategori.kategori])
+            return True
+        except Exception as exp:
+            print(exp)
+            return  False
+
+
