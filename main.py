@@ -203,7 +203,6 @@ class MyForm(QMainWindow):
 
     def listedeKiElemanSecildi(self):
         self.secilenKelime.kelime = self.ui.listWidget.currentItem().text()
-
         sonuc = KelimeBLL.KelimeVideoBul(self.secilenKelime)
         print(sonuc)
         self.videoyuOynat(sonuc)
