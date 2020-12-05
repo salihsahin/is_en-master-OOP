@@ -16,7 +16,7 @@ class KelimeDAL:
 
 
     @staticmethod
-    def KelimeEkle(kelime, video):
+    def KelimeEkle(kelime=Kelime, video=Video):
         try:
             yeniKelime = kelime
             yeniVideo = video
@@ -36,7 +36,7 @@ class KelimeDAL:
         pass
 
     @staticmethod
-    def KelimeSil(KelimeEntity):
+    def KelimeSil(KelimeEntity=Kelime):
         silinecekKelime = KelimeEntity
         try:
             with conn:
@@ -55,7 +55,7 @@ class KelimeDAL:
         pass
 
     @staticmethod
-    def KelimeVideoBul(Kelime):
+    def KelimeVideoBul(Kelime=Kelime):
         try:
             with conn:
                 cur = conn.cursor()
@@ -67,7 +67,7 @@ class KelimeDAL:
             return None
 
     @staticmethod
-    def KelimeIDBul(Kelime):
+    def KelimeIDBul(Kelime=Kelime):
         try:
             print("kelime dal Kelime Id Bul çalıştı")
             print(Kelime.kelime)

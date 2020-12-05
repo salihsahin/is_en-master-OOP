@@ -11,7 +11,7 @@ class KategoriBLL:
         return KategoriDAL.KategorileriListele()
 
     @staticmethod
-    def KategoriKelimeIdEkle(eklenenKelimeId,kategori):
+    def KategoriKelimeIdEkle(eklenenKelimeId,kategori=Kategori):
         print("Kategori EKleme  başlayacak")
         return KategoriDAL.KategoriKelimeIdEkle(eklenenKelimeId,kategori)
 
@@ -20,7 +20,7 @@ class KategoriBLL:
         pass
 
     @staticmethod
-    def KelimeyeAitKategoriBul(Kelime):
+    def KelimeyeAitKategoriBul(Kelime=Kelime):
         print("Kategori Bul Bll Çalıştı")
         KelimeBLL.KelimeIDBul(Kelime)
         print("Kelime ID BUl Bitti")
@@ -32,7 +32,7 @@ class KategoriBLL:
         return  KategoriDAL.KelimeyeAitKategoriBul(Kelime)
 
     @staticmethod
-    def KategoriKelimeIdGuncelle(kelime, kategori):
+    def KategoriKelimeIdGuncelle(kelime=Kelime, kategori=Kategori):
         KategoriBLL.KategoriKelimeIdSil(kelime)
         print("Kategori eklenecek : ")
         print(kelime.kelimeId)
