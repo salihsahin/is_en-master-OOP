@@ -36,6 +36,8 @@ class MyForm(QMainWindow):
 
         self.secilenKelime=Kelime
         self.secilenKategori = Kategori
+
+        self.silinecekKategori=Kategori
         self.kelimeListesi = []
         self.kategoriListesi = []
         self.seciliListe = []
@@ -55,11 +57,14 @@ class MyForm(QMainWindow):
         self.show()
 
     def listeleriHazirla(self):
-        kelimeListesiTupple  = KelimeBLL.KelimeleriListele()
-        kategoriListesiTupple = KategoriBLL.KategorileriListele()
-        self.kelimeListesi = [item[0] for item in kelimeListesiTupple]
-        self.kategoriListesi = [item[0] for item in kategoriListesiTupple]
-        self.kategoriListesi.insert(0, "Kategori Seçin")
+        try:
+
+            kelimeListesiTupple  = KelimeBLL.KelimeleriListele()
+            kategoriListesiTupple = KategoriBLL.KategorileriListele()
+            self.kelimeListesi = [item[0] for item in kelimeListesiTupple]
+            self.kategoriListesi = [item[0] for item in kategoriListesiTupple]
+        except Exception as exp:
+            print(exp)
 
 
     def yeniKelimeEkle(self):
@@ -115,9 +120,6 @@ class MyForm(QMainWindow):
 
 
 
-
-
-
     def kategoriDuzenle(self):
         item, okPressed = QInputDialog.getItem(self, "Kategori Düzenleme", "Düzenlenecek Kategori:", self.kategoriListesi, 0,
                                                False)
@@ -157,29 +159,31 @@ class MyForm(QMainWindow):
                 print(e)
 
     def kategoriSil(self):
-        item, okPressed = QInputDialog.getItem(self, "Kategori Silme İşlemi", "Silineek Kategoriyi Seçin:",
-                                               self.kategoriListesi, 0, False)
-        if okPressed and item:
-            if item != "Kategori Seçin":
-                try:
-                    with conn:
-                        cur = conn.cursor()
-                        cur.execute("DELETE FROM GRUPLAR Where GRUP_ADI=(?)", [item])
+        try:
+            self.silinecekKategori.kategori, okPressed = QInputDialog.getItem(self, "Kategori Silme İşlemi", "Silineek Kategoriyi Seçin:",
+                                                   self.kategoriListesi, 0, False)
+            if okPressed and self.silinecekKategori.kategori:
+                if self.silinecekKategori.kategori != "BÜTÜN İÇERİK":
 
-                    self.kategoriListesi.remove(item)
-                    self.ui.comboBox.clear()
-                    self.ui.comboBox.addItems(self.kategoriListesi)
+                    KategoriBLL.KategoriSil(Kategori)
+
+                    self.listeleriHazirla()
+
+                    self.comboListeHazirla()
+
                     self.ui.listWidget.clear()
                     self.ui.listWidget.addItems(self.kelimeListesi)
                     QMessageBox.information(self, "Kategroi Silme", "Kategori Silindi")
-                except Exception as e:
-                    print(e)
+                else :
+                    QMessageBox.warning(self, "Kategroi Silme", "Bu kategori silinemez.")
+        except Exception as exp:
+            print(exp)
+
 
     def comboBoxSecim(self):
         self.secilenKategori.kategori = self.ui.comboBox.itemText(self.ui.comboBox.currentIndex())
 
-
-        if (self.ui.comboBox.currentIndex() != 0):
+        if (self.ui.comboBox.currentIndex() != 0):  # düzeltilmesi gerekiyor  bütün hepsinde çıkması lazım
             try:
                 kelimeListesi = KategoriBLL.KategoriyeAitKelimeler(self.secilenKategori)
                 self.ui.listWidget.clear()

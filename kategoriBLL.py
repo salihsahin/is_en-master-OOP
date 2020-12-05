@@ -16,8 +16,10 @@ class KategoriBLL:
         return KategoriDAL.KategoriKelimeIdEkle(eklenenKelimeId,kategori)
 
 
-    def KategoriSil(self):
-        pass
+    def KategoriSil(kategori=Kategori):
+
+
+       return KategoriDAL.KategoriSil(kategori)
 
     @staticmethod
     def KelimeyeAitKategoriBul(Kelime=Kelime):

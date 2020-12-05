@@ -59,8 +59,16 @@ class KategoriDAL:
     def KategoriSil(self):
         pass
 
-    def KategoriSil(self):
-        pass
+    @staticmethod
+    def KategoriSil(kategori=Kategori):
+        try:
+            with conn:
+                cur = conn.cursor()
+                cur.execute("DELETE FROM GRUPLAR Where GRUP_ADI=(?)", [kategori.kategori])
+            return  True
+        except Exception as e:
+            print(e)
+            return False
 
     @staticmethod
     def KategoriKelimeIdEkle(eklenenKelimeId, kategori):
