@@ -16,26 +16,26 @@ class KelimeBLL:
         return KelimeDAL.KelimeleriListele()
 
     @staticmethod
-    def YeniKelimeEkle(kelime,video):
+    def YeniKelimeEkle(kelime=Kelime(),video=Video()):
         print("Kelime BLL başladı")
         return KelimeDAL.KelimeEkle(kelime,video)
 
     @staticmethod
-    def KelimeVideoGuncelle(KelimeEntity,videoEntity):
+    def KelimeVideoGuncelle(kelime=Kelime(),video=Video()):
         print("kelimvideogüncelle bll çalıştı.")
-        KelimeDAL.KelimeVideoGuncelle(KelimeEntity,videoEntity)
+        KelimeDAL.KelimeVideoGuncelle(kelime,video)
 
     @staticmethod
-    def KelimeSil(KelimeEntity,VideoEntity):
+    def KelimeSil(kelime=Kelime(),video=Video()):
 
-        VideoBLL.VideoSil(VideoEntity)
-        KategoriDAL.KategoriKelimeIdSil(KelimeEntity)
-        return KelimeDAL.KelimeSil(KelimeEntity)
+        VideoBLL.VideoSil(video)
+        KategoriDAL.KategoriKelimeIdSil(kelime)
+        return KelimeDAL.KelimeSil(kelime)
 
     @staticmethod
-    def KelimeVideoBul(kelime):
+    def KelimeVideoBul(kelime=Kelime()):
         return KelimeDAL.KelimeVideoBul(kelime)
 
     @staticmethod
-    def KelimeIDBul(Kelime):
-        return KelimeDAL.KelimeIDBul(Kelime)
+    def KelimeIDBul(kelime=Kelime()):
+        return KelimeDAL.KelimeIDBul(kelime)

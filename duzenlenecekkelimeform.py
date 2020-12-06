@@ -21,9 +21,9 @@ from helper import Helper
 class DuzenlenecekKelimeForm(QDialog):
 
     def __init__(self):
-        self.duzenlenecekKelimObj = Kelime
-        self.duzenlenecekVideoObj = Video
-        self.duzenlenecekKategoriObj = Kategori
+        self.duzenlenecekKelimObj = Kelime()
+        self.duzenlenecekVideoObj = Video ()
+        self.duzenlenecekKategoriObj = Kategori()
 
         self.seciliListe = []
         super(DuzenlenecekKelimeForm, self).__init__()

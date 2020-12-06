@@ -21,9 +21,9 @@ from helper import Helper
 
 class YeniKelimeEkle(QDialog):
     def __init__(self):
-        self.yeniKelimObj= Kelime
-        self.yeniVideoObj=Video
-        self.yeniKategoriObj = Kategori
+        self.yeniKelimObj= Kelime()
+        self.yeniVideoObj=Video()
+        self.yeniKategoriObj = Kategori()
         super(YeniKelimeEkle, self).__init__()
         self.setWindowTitle("Yeni Kelime Ekle")
         self.setFixedSize(400, 300)

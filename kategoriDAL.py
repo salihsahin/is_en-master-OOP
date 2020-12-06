@@ -8,7 +8,7 @@ conn = sqlite3.connect('Sozluk.db')
 
 class KategoriDAL:
 
-
+    @staticmethod
     def KategorileriListele():
         print("dal çalıştı")
         with conn:
@@ -19,7 +19,7 @@ class KategoriDAL:
 
 
     @staticmethod
-    def KelimeyeAitKategoriBul(Kelime):
+    def KelimeyeAitKategoriBul(kelime=Kelime()):
         kelimeKategoriListesiTupple=""
         try:
             print("Kelimeye ait kategorileri bul çalışıyorç")
@@ -30,7 +30,7 @@ class KategoriDAL:
                 cur = conn.cursor()
                 print(Kelime.kelimeId)
 
-                cur.execute("select GRUP_ID from GRUP_KELIMELERI where KELIME_ID = ? ",[Kelime.kelimeId])
+                cur.execute("select GRUP_ID from GRUP_KELIMELERI where KELIME_ID = ? ",[kelime.kelimeId])
 
 
                 kelimeKategoriIdListesiTupple = cur.fetchall()
@@ -53,14 +53,9 @@ class KategoriDAL:
             print(exp)
         return kelimeKategoriListesiTupple
 
-    def KategoriEkle(self):
-        pass
-
-    def KategoriSil(self):
-        pass
 
     @staticmethod
-    def KategoriSil(kategori=Kategori):
+    def KategoriSil(kategori=Kategori()):
         try:
             with conn:
                 cur = conn.cursor()
@@ -71,7 +66,7 @@ class KategoriDAL:
             return False
 
     @staticmethod
-    def KategoriKelimeIdEkle(eklenenKelimeId, kategori):
+    def KategoriKelimeIdEkle(eklenenKelimeId, kategori=Kategori()):
         print("Kategori EKlenecek")
         yeniKategori= kategori
         try:
@@ -94,7 +89,7 @@ class KategoriDAL:
             return False
 
     @staticmethod
-    def KategoriKelimeIdSil(kelime=Kelime):
+    def KategoriKelimeIdSil(kelime=Kelime()):
         try:
             with conn:
                 print("Kategoriler silinmeye başlandı")
@@ -113,7 +108,7 @@ class KategoriDAL:
             return False
 
     @staticmethod
-    def KategoriyeAitKelimeler(kategori=Kategori):
+    def KategoriyeAitKelimeler(kategori=Kategori()):
         sonuc=""
         with conn:
             cur = conn.cursor()
@@ -125,15 +120,30 @@ class KategoriDAL:
 
 
     @staticmethod
-    def KategoriEkle(kategori=Kategori):
+    def KategoriEkle(kategori=Kategori()):
         try:
             with conn:
                 cur = conn.cursor()
                 cur.execute("INSERT INTO GRUPLAR (GRUP_ADI) VALUES (?)",
                             [kategori.kategori])
+
             return True
         except Exception as exp:
             print(exp)
             return  False
+
+    @staticmethod
+    def KategoriDuzenle(eskiKategori=Kategori(), yeniKategori=Kategori()):
+        try:
+            print(eskiKategori.kategori)
+            print(yeniKategori.kategori)
+            print("Kategori dal düzenlenecek.")
+            with conn:
+                cur = conn.cursor()
+                cur.execute("UPDATE GRUPLAR SET GRUP_ADI = (?) WHERE GRUP_ADI=(?)", [yeniKategori.kategori,eskiKategori.kategori])
+            return True
+        except Exception as exp:
+            print(exp)
+            return False
 
 

@@ -12,8 +12,8 @@ from helper import Helper
 class SilinecekKelimeForm(QDialog):
 
     def __init__(self):
-        self.silienecekKelimObj= Kelime
-        self.silinecekVideoObj=Video
+        self.silienecekKelimObj= Kelime ()
+        self.silinecekVideoObj=Video ()
         self.seciliListe =[]
         super(SilinecekKelimeForm, self).__init__()
         self.setWindowTitle("Kelime Silme")

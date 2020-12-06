@@ -34,11 +34,11 @@ class MyForm(QMainWindow):
         self.ui.actionKelime_Sil.triggered.connect(self.kelimeSil)
         self.ui.actionKelime_Duzenle.triggered.connect(self.kelimeDuzenle)
 
-        self.secilenKelime=Kelime
-        self.secilenKategori = Kategori
-        self.yeniKategori=Kategori
+        self.secilenKelime=Kelime()
+        self.secilenKategori = Kategori()
+        self.yeniKategori=Kategori()
 
-        self.silinecekKategori=Kategori
+        self.silinecekKategori=Kategori()
         self.kelimeListesi = []
         self.kategoriListesi = []
         self.seciliListe = []
@@ -125,21 +125,35 @@ class MyForm(QMainWindow):
     def kategoriDuzenle(self):
         item, okPressed = QInputDialog.getItem(self, "Kategori Düzenleme", "Düzenlenecek Kategori:", self.kategoriListesi, 0,
                                                False)
-        if okPressed and item:
+        eskiKategori=Kategori()
+        eskiKategori.kategori=item
+        pass
+        if okPressed :
             if item != "Kategori Seçin":
                 duzenlenmis, ok = QInputDialog.getText(self, "Kategori Düzenle", f"Düzenlenen Kategori:  {item}",
                                                        QLineEdit.Normal, "")
-                if ok and item:
-                    with conn:
-                        cur = conn.cursor()
-                        cur.execute("UPDATE GRUPLAR SET GRUP_ADI = (?) WHERE GRUP_ADI=(?)", [duzenlenmis, item])
-                    self.kategoriListesi.remove(item)
-                    self.kategoriListesi.append(duzenlenmis)
-                    self.ui.comboBox.clear()
-                    self.ui.comboBox.addItems(self.kategoriListesi)
-                    self.ui.listWidget.clear()
-                    self.ui.listWidget.addItems(self.kelimeListesi)
-                    QMessageBox.information(self, "Düzenleme", "Kategori Düzenlendi")
+                yeniKategori = Kategori()
+                yeniKategori.kategori = duzenlenmis
+
+                if ok and yeniKategori.kategori:
+                    print(eskiKategori.kategori)
+                    print(yeniKategori.kategori)
+                    guncellendiMi = KategoriBLL.KategoriDuzenle(eskiKategori,yeniKategori)
+
+                    if guncellendiMi :
+                        QMessageBox.information(self, "Düzenleme", "Kategori Düzenlendi")
+                        self.listeleriHazirla()
+                        self.comboListeHazirla()
+                        self.listeyiHazirla()
+
+                    else :
+                        QMessageBox.warning(self, "Düzenleme", "Kategori Düzenlenmedi")
+                else:
+                    QMessageBox.information(self, "Düzenleme", "Vazgeçildi.")
+            else:
+                QMessageBox.warning(self, "Düzenleme", "Kategori seçmediğiniz için iptal edildi.")
+        else:
+            QMessageBox.information(self, "Düzenleme", "Vazgeçildi.")
 
     def yeniKategoriEkle(self):
         try:

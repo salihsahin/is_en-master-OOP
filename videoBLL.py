@@ -9,7 +9,7 @@ class VideoBLL:
         pass
 
     @staticmethod
-    def VideoSil(silinecekVideo=Video):
+    def VideoSil(silinecekVideo=Video()):
         try:
 
             print("Silinecek video")
@@ -27,7 +27,7 @@ class VideoBLL:
 
 
     @staticmethod
-    def VideoKopyala(video=Video):
+    def VideoKopyala(video=Video()):
         try:
             print(video.videoKaynakYol)
             print(video.videoHedefYol)

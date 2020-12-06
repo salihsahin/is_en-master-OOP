@@ -16,14 +16,12 @@ class KelimeDAL:
 
 
     @staticmethod
-    def KelimeEkle(kelime=Kelime, video=Video):
+    def KelimeEkle(kelime=Kelime(), video=Video()):
         try:
-            yeniKelime = kelime
-            yeniVideo = video
             print("kelime EKleme  başlayacak")
             with conn:
                 cur = conn.cursor()
-                cur.execute("INSERT INTO KELIMELER (KELIME_ADI,KELIME_YOLU) VALUES(?,?)", [yeniKelime.kelime, yeniVideo.videoHedefYol])
+                cur.execute("INSERT INTO KELIMELER (KELIME_ADI,KELIME_YOLU) VALUES(?,?)", [kelime.kelime, video.videoHedefYol])
                 kelimeId = cur.lastrowid
                 print("kelime eklendi")
                 return kelimeId
@@ -36,12 +34,12 @@ class KelimeDAL:
         pass
 
     @staticmethod
-    def KelimeSil(KelimeEntity=Kelime):
-        silinecekKelime = KelimeEntity
+    def KelimeSil(kelime=Kelime()):
+
         try:
             with conn:
                 cur = conn.cursor()
-                cur.execute("DELETE FROM KELIMELER Where KELIME_ADI=(?)", [silinecekKelime.kelime])
+                cur.execute("DELETE FROM KELIMELER Where KELIME_ADI=(?)", [kelime.kelime])
             return True
         except Exception as e:
             print(e)
@@ -55,11 +53,11 @@ class KelimeDAL:
         pass
 
     @staticmethod
-    def KelimeVideoBul(Kelime=Kelime):
+    def KelimeVideoBul(kelime=Kelime()):
         try:
             with conn:
                 cur = conn.cursor()
-                cur.execute("SELECT KELIME_YOLU FROM KELIMELER Where KELIME_ADI=(?)", [Kelime.kelime])
+                cur.execute("SELECT KELIME_YOLU FROM KELIMELER Where KELIME_ADI=(?)", [kelime.kelime])
                 sonuc = cur.fetchone()[0]
             return sonuc
         except Exception as exp:
@@ -67,7 +65,7 @@ class KelimeDAL:
             return None
 
     @staticmethod
-    def KelimeIDBul(Kelime=Kelime):
+    def KelimeIDBul(kelime=Kelime()):
         try:
             print("kelime dal Kelime Id Bul çalıştı")
             print(Kelime.kelime)
@@ -75,7 +73,7 @@ class KelimeDAL:
 
             with conn:
                 cur = conn.cursor()
-                cur.execute("select ID from KELIMELER where KELIME_ADI=(?)", [Kelime.kelime])
+                cur.execute("select ID from KELIMELER where KELIME_ADI=(?)", [kelime.kelime])
                 bulunacakKelimeId = cur.fetchone()[0]
                 print("Bulundu.")
         except Exception as exp:
@@ -86,17 +84,17 @@ class KelimeDAL:
         return Kelime
 
     @staticmethod
-    def KelimeVideoGuncelle(KelimeEntity=Kelime,VideoEntity=Video):
+    def KelimeVideoGuncelle(kelime=Kelime(),video=Video()):
         print("kelimevideo güncelle dal çalıştı.")
-        KelimeDAL.KelimeIDBul(KelimeEntity)
+        KelimeDAL.KelimeIDBul(kelime)
 
         print("Keliem İd ")
-        print(KelimeEntity.kelimeId)
+        print(kelime.kelimeId)
 
         try:
             with conn:
                 cur = conn.cursor()
-                cur.execute("update KELIMELER set KELIME_ADI=(?),KELIME_YOLU=(?) where ID=(?)", [KelimeEntity.duzenlenecekYeniKelime, VideoEntity.videoHedefYol,KelimeEntity.kelimeId])
+                cur.execute("update KELIMELER set KELIME_ADI=(?),KELIME_YOLU=(?) where ID=(?)", [kelime.duzenlenecekYeniKelime, video.videoHedefYol,kelime.kelimeId])
 
         except Exception as exp:
             print(exp)
