@@ -64,6 +64,7 @@ class MyForm(QMainWindow):
             kategoriListesiTupple = KategoriBLL.KategorileriListele()
             self.kelimeListesi = [item[0] for item in kelimeListesiTupple]
             self.kategoriListesi = [item[0] for item in kategoriListesiTupple]
+            self.kategoriListesi.insert(0, "Kategori Seçin")
         except Exception as exp:
             print(exp)
 
@@ -167,7 +168,7 @@ class MyForm(QMainWindow):
             self.silinecekKategori.kategori, okPressed = QInputDialog.getItem(self, "Kategori Silme İşlemi", "Silinecek Kategoriyi Seçin:",
                                                    self.kategoriListesi, 0, False)
             if okPressed and self.silinecekKategori.kategori:
-                if self.silinecekKategori.kategori != "BÜTÜN İÇERİK":
+                if self.silinecekKategori.kategori != "Kategori Seçin":
 
                     KategoriBLL.KategoriSil(Kategori)
 
@@ -179,7 +180,7 @@ class MyForm(QMainWindow):
                     self.ui.listWidget.addItems(self.kelimeListesi)
                     QMessageBox.information(self, "Kategroi Silme", "Kategori Silindi")
                 else :
-                    QMessageBox.warning(self, "Kategroi Silme", "Bu kategori silinemez.")
+                    QMessageBox.warning(self, "Kategroi Silme", "Bu seçenek silinemez.")
         except Exception as exp:
             print(exp)
 
