@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(714, 369)
+        MainWindow.resize(729, 369)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -33,6 +33,7 @@ class Ui_MainWindow(object):
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(190, 10, 501, 301))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+
         self.layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.layout.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.layout.setContentsMargins(0, 0, 0, 0)
@@ -47,13 +48,14 @@ class Ui_MainWindow(object):
 
         self.menuKelimeler = QtWidgets.QMenu(self.menubar)
         self.menuKelimeler.setObjectName("menuKelimeler")
+
         self.menuKategoriler = QtWidgets.QMenu(self.menubar)
-
         self.menuKategoriler.setObjectName("menuKategoriler")
-        self.menuS_nav = QtWidgets.QMenu(self.menubar)
-        self.menuS_nav.setObjectName("menuS_nav")
-        self.menuHakk_nda = QtWidgets.QMenu(self.menubar)
 
+        self.menuEglence = QtWidgets.QMenu(self.menubar)
+        self.menuEglence.setObjectName("menuEglence")
+
+        self.menuHakk_nda = QtWidgets.QMenu(self.menubar)
         self.menuHakk_nda.setObjectName("menuHakk_nda")
 
         MainWindow.setMenuBar(self.menubar)
@@ -84,9 +86,11 @@ class Ui_MainWindow(object):
         self.actionKategori_Sil.setObjectName("actionKategori_Sil")
 
 
-        self.actionRastgele_S_nav_Yap = QtWidgets.QAction(MainWindow)
-        self.actionRastgele_S_nav_Yap.setObjectName("actionRastgele_S_nav_Yap")
+        self.actionCoktanSecmeliSinav = QtWidgets.QAction(MainWindow)
+        self.actionCoktanSecmeliSinav.setObjectName("actionCoktanSecmeliSinav")
 
+        self.actionHafizaOyunu = QtWidgets.QAction(MainWindow)
+        self.actionHafizaOyunu.setObjectName("actionHafizaOyunu")
 
         self.actionHakk_nda = QtWidgets.QAction(MainWindow)
         self.actionHakk_nda.setObjectName("actionHakk_nda")
@@ -104,8 +108,8 @@ class Ui_MainWindow(object):
         self.menuKategoriler.addAction(self.actionKategori_Duzenle)
         self.menuKategoriler.addAction(self.actionKategori_Sil)
 
-        self.menuS_nav.addAction(self.actionRastgele_S_nav_Yap)
-
+        self.menuEglence.addAction(self.actionCoktanSecmeliSinav)
+        self.menuEglence.addAction(self.actionHafizaOyunu)
         self.menuHakk_nda.addAction(self.actionHakk_nda)
 
         self.menuHakk_nda.addSeparator()
@@ -114,7 +118,7 @@ class Ui_MainWindow(object):
 
         self.menubar.addAction(self.menuKelimeler.menuAction())
         self.menubar.addAction(self.menuKategoriler.menuAction())
-        self.menubar.addAction(self.menuS_nav.menuAction())
+        self.menubar.addAction(self.menuEglence.menuAction())
         self.menubar.addAction(self.menuHakk_nda.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -125,7 +129,8 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "İşaret Dili Sözlüğü"))
         self.menuKelimeler.setTitle(_translate("MainWindow", "Kelimeler"))
         self.menuKategoriler.setTitle(_translate("MainWindow", "Kategoriler"))
-        self.menuS_nav.setTitle(_translate("MainWindow", "Sınav"))
+        self.menuEglence.setTitle(_translate("MainWindow", "Eğlence"))
+
         self.menuHakk_nda.setTitle(_translate("MainWindow", "Hakkında"))
         self.actionKelime_Ekle.setText(_translate("MainWindow", "Kelime Ekle"))
         self.actionKelime_Duzenle.setText(_translate("MainWindow", "Kelime Düzenle"))
@@ -133,7 +138,10 @@ class Ui_MainWindow(object):
         self.actionKategori_Ekle.setText(_translate("MainWindow", "Kategori Ekle"))
         self.actionKategori_Duzenle.setText(_translate("MainWindow", "Kategori Düzenle"))
         self.actionKategori_Sil.setText(_translate("MainWindow", "Kategori Sil"))
-        self.actionRastgele_S_nav_Yap.setText(_translate("MainWindow", "Rastgele Sınav Yap"))
+        self.actionCoktanSecmeliSinav.setText(_translate("MainWindow", "Çoktan Seçmeli Sınav"))
+
+        self.actionHafizaOyunu.setText(_translate("MainWindow", "Hafıza Oyunu"))
+
         self.actionHakk_nda.setText(_translate("MainWindow", "Hakkında"))
         self.actionYard_m.setText(_translate("MainWindow", "Yardım"))
 

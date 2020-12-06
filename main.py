@@ -6,6 +6,9 @@ from PyQt5.QtWidgets import QDialog, QApplication, QFileDialog, QInputDialog, QM
 from kelimeislemleri import YeniKelimeEkle
 from silinecekkelimeform import SilinecekKelimeForm
 from duzenlenecekkelimeform import DuzenlenecekKelimeForm
+from Sinav_coktan_secme import *
+from isaret_dili_hafiza_oyunu import HafizaOyunu
+
 from form import *
 import sqlite3
 from kategoriBLL import KategoriBLL
@@ -29,7 +32,9 @@ class MyForm(QMainWindow):
         self.ui.actionKategori_Ekle.triggered.connect(self.yeniKategoriEkle)
         self.ui.actionKategori_Sil.triggered.connect(self.kategoriSil)
         self.ui.actionKategori_Duzenle.triggered.connect(self.kategoriDuzenle)
-        self.ui.actionRastgele_S_nav_Yap.triggered.connect(self.rastgeleSinav)
+        self.ui.actionCoktanSecmeliSinav.triggered.connect(self.sinavCoktanSecmeli)
+        self.ui.actionHafizaOyunu.triggered.connect(self.hafizaOyunuAc)
+
         self.ui.actionKelime_Ekle.triggered.connect(self.yeniKelimeEkle)
         self.ui.actionKelime_Sil.triggered.connect(self.kelimeSil)
         self.ui.actionKelime_Duzenle.triggered.connect(self.kelimeDuzenle)
@@ -230,8 +235,10 @@ class MyForm(QMainWindow):
         print(sonuc)
         self.videoyuOynat(sonuc)
 
-    def rastgeleSinav(self):
-        pass
+    def sinavCoktanSecmeli(self):
+        self.Form = QtWidgets.QWidget()
+        self.Form.ui = Sinav_coktan_secme()
+        self.Form.ui.show()
 
     def aramaMetniDegistir(self):
         self.ui.listWidget.clear()
@@ -242,6 +249,11 @@ class MyForm(QMainWindow):
                 self.seciliListe.append(v)
 
         self.ui.listWidget.addItems(self.seciliListe)
+
+    def hafizaOyunuAc(self):
+        h = HafizaOyunu()
+        h.oyunuBaslat()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
